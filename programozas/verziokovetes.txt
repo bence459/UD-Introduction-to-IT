@@ -1,0 +1,63 @@
+Kedves Hallgatók!
+
+Mivel sokan közületek fejlesztőként fogtok dolgozni a jövőben, ezért érdemes megismerkedni egy-két alapvető gyakorlati informatikai munkaeszközzel. Legyen az első a verziókövető rendszer. Magányos programozók nincsenek, a valóságban sokszor előfordul, hogy egy-egy projekten többen dolgoztok. Ilyenkor a program forráskódját egyszerre többen módosítjátok, így a módosításokat fontos rendszerezve kezelni. Mi is történik? Van egy program, amit adott cég már hónapok óta fejleszt. Felkérnek téged, kedves hallgató, hogy segíts nekik, mert el vannak akadva. Letöltöd (pontosabban leclone-ozod) a tárolót, megoldod a problémát pár nap alatt, majd feltöltöd a már javított forráskódot. Ugye ez nehezen elképzelhető emailben vagy google drive-on. :) Erre szolgál a verziókövetés, valamint a verziókövető rendszerek. Miért jó még? Ha netán valamelyik helyi programozó elrontaná a kódot, amit Te kijavítottál, akkor bármikor, bármelyik korábbi verzióra vissza lehet állítani az aktuális forráskódot. Kell ennél több?! :)
+Lássunk egy konkrét példát! Létrehoztam egy nyilvános tárolót a kurzusnak itt: https://github.com/rbesenczi/UD-Introduction-to-IT
+Hogyan is működik a dolog: 
+Telepítsd fel a git-et:
+renato@renato-90X3A:~$ sudo apt-get install git
+
+Készíts egy saját példányt a saját gépeden az alábbi paranccsal:
+$ git clone https://github.com/rbesenczi/UD-Introduction-to-IT.git
+
+Cloning into 'UD-Introduction-to-IT'...
+remote: Counting objects: 20, done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 20 (delta 1), reused 16 (delta 0), pack-reused 0
+Unpacking objects: 100% (20/20), done.
+Checking connectivity... done.
+
+Ha minden jól megy:
+
+renato@renato-90X3A:~/temp$ ls
+UD-Introduction-to-IT
+renato@renato-90X3A:~/temp$ cd UD-Introduction-to-IT/
+renato@renato-90X3A:~/temp/UD-Introduction-to-IT$ ls
+contributors.txt  exor  hazik  LICENSE  programozas  README.md  ujjgyakorlat
+
+Itt már körül is nézhetsz, az eddig kiírt házikat találod.
+Na most jön a trükkösebb rész, tegyünk fel valamit a repóba. :)
+Találsz egy contributors.txt file-t. Az én nevem már ott van, most írd be a tiedet (vagy egy nicknevet).
+Mit kell tenned? Első lépésként be kell regisztrálnod GitHub-ra. (Ne aggódj, teljesen spam-free a dolog).
+Ha ez megvan, akkor küldd el nekem a felhasználónevedet, hogy írási jogot adhassak a tárolóhoz. Amint ez megvan (jelzek majd):
+
+Töröld le az eredetileg lehozott tárolót!
+renato@renato-90X3A:~/temp$ ls
+UD-Introduction-to-IT
+renato@renato-90X3A:~/temp$ rm -rf UD-Introduction-to-IT/
+
+Hozd le újra! Jelentkezz be GitHub-ra, keresd meg a tárolót, majd a jobb oldalon másold ki az "SSH clone URL"-t (valami ilyesmi: git@github.com...).
+renato@renato-90X3A:~/work$ git clone [és maga az URL]
+renato@renato-90X3A:~/work$ cd UD-Introduction-to-IT/
+renato@renato-90X3A:~/work/UD-Introduction-to-IT$ more contributors.txt 
+Besenczi Renátó
+
+renato@renato-90X3A:~/work/UD-Introduction-to-IT$ gedit contributors.txt 
+Írd be magad, majd mentsd el!
+
+Véglegesítsd a módosításod:
+renato@renato-90X3A:~/work/UD-Introduction-to-IT$ git commit contributors.txt -m "Added myself to contributors"
+[master 13d51fc] Added myself to contributors
+ 1 file changed, 1 insertion(+)
+ create mode 100644 contributors.txt
+
+Majd told fel a tárolóba:
+renato@renato-90X3A:~/work/UD-Introduction-to-IT$ git push
+
+Ellenőrizd, hogy látod-e a saját változtatásod (a kis üzenetet):
+renato@renato-90X3A:~/work/UD-Introduction-to-IT$ git log
+
+Fontos! Ha ezután bármikor ismét meg akarsz valamit nézni/módosítani/javítani a repón az alábbi parancsot kell csak kiadnod:
+renato@renato-90X3A:~/work/UD-Introduction-to-IT$ git pull
+
+A tároló a saját gépeden ettől fog frissülni, vagy esetleg kiírja, hogy jelenleg up-to-date.
+Egy házi feladatot jóvá írok annak, aki beírja a nevét!
