@@ -1,0 +1,108 @@
+Kedves Hallgatóság!
+
+Kezdjük el a felkészülést a kurzus programozás részére. Remélem már mindenki feltelepített a saját gépére egy tetszőleges UNIX/Linux disztribúciót, ha nem, akkor a közelgő hétvége remek alkalmat kínál erre. Magam az Ubuntu-ra (illetve OS X-re) tudok supportot biztosítani, ha bármi elakadás lenne, így én ezt preferálom. Ettől függetlenül természetesen a választás szabadsága adott, lehet Debian, Fedora, akár Apple OS X is, bár utóbbi csak akkor, ha hardver is van hozzá. :) A Windowsban programozás jelen kurzusban nem értelmezhető, bár lesz olyan feladat, ami ott is megoldható. A további tanulmányaitok során valamilyen Linuxot rendszeresen kell majd használnotok, így a környezet megismerése egy kellemes velejárója a kurzusnak.
+A feltelepítés után a futtató/fordító eszközkészlet megismerése következik. Nyiss meg egy terminálablakot! Az operációs rendszer karakteres felületét fogjuk használni a félév során. Olyan egyszerű feladatokhoz, amiket csinálni fogunk ez a legegyszerűbben használható megoldás, ezen felül sokminden egyszerűbb itt (bár ehhez rutin kell, aminek egy részét a félév végéig el fogjátok sajátítani).
+Az alapvető utasítások elsajátítását laboron fogjuk részletesen megtenni, az alábbiakban csak pár lényeges elemet villantok fel egy programozási példán keresztül. Szóval legyen a terminal nyitva.
+Töltsd le az általam küldött első házi feladatot, majd bontsd ki!
+Ezután a terminálablakban (a $ utáni parancsot írd be, persze ahova letöltötted oda navigálj):
+
+renato@renato-90X3A:~$ cd Downloads/elso/ujjgyakorlat/
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ ls
+elso.c  Elso.java
+
+Megvan a két forrásfile-unk. (Az ls parancs a mappa tartalmát listázza.)
+Nézzük meg a C-ben írt forrásunkat! (A more parancs a file tartalmát írja a kimenetre.)
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ more elso.c 
+//$ gcc elso.c -o elso -Wall -std=c99
+//$ ./elso
+
+#include <stdio.h>
+
+int main(int argc, char** argv){
+	
+	for (int i = 0; i < 1000; i++)
+		printf("%d ", i);
+	printf("\n");
+
+	return 0;
+}
+
+Itt a forrásba én beleírtam, hogy hogyan kell használni a progit: Első sor fordítás, második sor futtatás. Írjuk is be:
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ gcc elso.c -o elso -Wall -std=c99
+
+Ha nincs kimenet, akkor minden rendben, a progi hiba (error) és figyelmeztetés (warning) nélkül fordult le. Futtassuk a progit:
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ ./elso
+
+Ha minden jól ment, akkor a progi kiírja 0-999-ig az összes számot.
+Rendben is vagyunk eddig.
+
+A feladatunk az, hogy csak a páratlan számokat írjuk ki. A for (int i = 0; i < 1000; i++) sor azt mondja nekünk, hogy induljon egy ciklus, ahol az első lépés az "i" változó inicializálása 0-ra, menjen a ciklus addig, amíg az "i" változó kisebb, mint 1000, és cikluslépésenként növeljük az "i" változó értékét eggyel (i++, ami annyit jelent, hogy i = i + 1). Persze minden egyes lépésben hajtsuk végre a ciklus törzsébe írt utasításokat, ami jelen esetben az i változó értékének kiírása. Mit is kell módosítanunk? Először is ahhoz, hogy csak a páratlan számokat írjuk ki, az kell, hogy csak minden második számot írjon ki a program. Módosítsuk az 'i++' részt arra, hogy 'i = i + 2'. Ez eddig oké, de így a párosakat fogja kiírni. Semmi gond, módosítsuk a kezdőértéket 'i = 0'-ról 'i = 1'-re.
+Hogy mivel is módosítsuk. Az Ubuntuban van egy beépített szövegszerkesztő, nevezetesen a gedit. Indítsuk el:
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ gedit &
+A gedit kb. úgy működik, mint a Windowsban a Notepad, tehát nagy meglepetést nem fog okozni. Itt már meg tudjuk nyitni a forrásunkat, módosítani tudjuk, el tudjuk menteni. Tegyük meg!
+
+Ezután fordítsuk le újra a programot:
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ gcc elso.c -o elso -Wall -std=c99
+
+Majd futtassuk le: 
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ ./elso
+
+Ha minden jól ment, 1-999 kell látnod a páratlan számokat. Kérdéseim az alábbiak:
+1. Mi történik, ha így fordítod a programot? Mi a hiba oka?
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ gcc elso.c -o elso -Wall
+
+2. Vizsgáld meg a printf függvény manualbeli paramétereit:
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ man 3 printf
+A C programozói manuál egy szabvány eszköz programozáshoz, így ez fontos lesz számunkra a későbbiekben. Megtanulni nem kell, sőt szinte tilos, hiszen mindig ott lesz a gépeden. :)
+
+A C-s feladattal végeztünk, a java-s feladat egy kicsit több munkát igényel. Először is telepítenünk kell a java-t, mert ez alapból nincs fent az Ubuntu mellett. Erre az Ubuntu szabvány csomagkezelőjét használjuk természetesen parancssorból:
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ sudo apt-get install openjdk-8-jdk openjdk-8-jre
+[sudo] password for renato:
+
+A jelszó beírása után letölti és telepíti a Java Development Kit-et és a Java Runtime Environmentet (ezekről részletesebben majd laboron, de akár már rá is guglizhatsz, hogy mik ezek).
+
+Nézzük meg a Java programunkat: 
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ more Elso.java 
+//$ javac Elso.java
+//$ java Elso
+
+public class Elso{
+	
+	public static void main(String args[]){
+		for (int i = 0; i < 1000; i++)
+			System.out.println(i);
+	}
+}
+
+A dolgok hasonlóak, de azért mégis kicsit más. Hogyan fordítunk egy Java programot? Ott van a forrás első sorában:
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ javac Elso.java
+
+Ha nincs hiba az szuper! Futtassuk:
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ java Elso
+
+A kimenet hasonló, de valamiért soronként ír egy számot. Mit mást is tehetnénk, minthogy megnézzük, hogyan is működik a println függvény:
+Nyiss egy böngészőt és írd be gugliba, hogy "System.out.println". A találatok között keress olyan, hogy Oracle Documentation és kattints rá. Itt egy rövid leírást találsz a print és println függvények működéséről. Látjuk is, hogy a println a print line rövidítése, tehát a függvény minden egyes meghívása után egy új sort tesz. Egyszerű a dolgunk: írjuk át a "println" részt "print"-re. Fordítsuk és futtassuk:
+
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ javac Elso.java
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ java Elso
+
+Itt valami nem az igazi, ugye? Most nem tett új sort, viszont nincs tagolva a kimenet. Kellene egy szóköz a számok közé:
+A for ciklus törzsét írjuk át erre: System.out.print(i + " ");
+Próbáljuk ki:
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ javac Elso.java
+renato@renato-90X3A:~/Downloads/elso/ujjgyakorlat$ java Elso
+
+Heuréka! Működik. Már csak az a dolgunk, hogy itt is csak a páratlan számokat írja ki. Itt hasonlóan kell eljárnunk, mint a C-s változatnál. A ciklusfejben a feltételt kell ugyanúgy átírnunk, majd fordít, futtat (a szokott módon).
+
+Ezzel megírtuk első java és C-s programunkat. Jöjjenek a kérdések a face-re ha elakadás van, vagy csak valami nem világos, a közösség (és én) segít! :)
