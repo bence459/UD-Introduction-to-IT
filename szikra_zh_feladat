@@ -1,0 +1,35 @@
+//Feladat: egy bekért számban mennyi prim szam van
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+int prim(int szam){
+int maradek;
+int eredmeny = 1; 
+int counter=2;
+
+while( (counter <= szam-1) ){
+    maradek = szam % counter;
+    if (maradek == 0) eredmeny = 0;
+
+counter++;
+}
+return eredmeny;
+}
+
+int main(){
+
+int szam = 10;
+
+//printf("Add meg a szamot: ");
+//scanf("%d", &szam);
+
+int prim_szamlalo=0;
+int i=2;
+
+for(i;i<szam;i++) if (prim(i) == 1) prim_szamlalo++;
+
+printf("A megadott szamban %d db prim szam van.\n", prim_szamlalo);
+
+return 0;
+}
